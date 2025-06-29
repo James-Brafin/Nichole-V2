@@ -1,0 +1,16 @@
+{
+  "UniqueName": "JamesBrafin.Nichole",
+  "Version": "0.1.0",
+  "RequiredApiVersion": "1.6.0",
+  "EntryPointAssembly": "Nichole.dll",
+  "DisplayName": "Nichole",
+  "Description": "Your ship's Chemist. She creates lots of Reagents and benefits from discarding cards.",
+  "Author": "JamesBrafin",
+  "LoadPhase": "AfterDbInit",
+  "Dependencies": [
+    {
+      "UniqueName": "Shockah.Kokoro",
+      "Version": "2.10.0"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "character": {
+    "name": "Nichole",
+    "desc": "Nichole is your ship chemist. She creates lots of Reagents and benefits from discarding cards."
+  },
+  "status": {
+    "knowledge": {
+      "name": "Knowledge",
+      "desc": "Base limit of 3. When reaching the limit, spend the required <c=status>KNOWLEDGE</c> to gain 1 <c=status>POWERDRIVE</c> and 1 <c=status>LESSON</c>. Excess <c=status>KNOWLEDGE</c> is not lost."
+    },
+    "lesson": {
+      "name": "Lesson",
+      "desc": "Increase the limit of <c=status>KNOWLEDGE</c> by {0}."
+    }
+  },
+  "action": {
+    "ReactionCost": {
+      "title": "Reaction",
+      "desc": "Discards the left-most Reagent in your hand to trigger this effect. If there are no reagents in your hand, does nothing."
+    },
+    "variableHintDiscard": {
+      "desc": "Counts the number of cards in your discard pile."
+    }
+  },
+  "trait": {
+    "Reagent": {
+      "title": "Reagent",
+      "desc": "Used for Reactions. When discarded, activate the On Discard effect."
+    }
+  },
+  "card": {
+    "AdamantiumSkin": {
+      "name": "Adamantium Skin"
+    },
+    "Adrenaline": {
+      "name": "Adrenaline"
+    },
+    "AnalysisAttack": {
+      "name": "Analysis Attack"
+    },
+    "BagDump": {
+      "name": "Bag Dump"
+    },
+    "CaffeineShot": {
+      "name": "Caffeine Shot"
+    },
+    "CausticFoam": {
+      "name": "Caustic Foam"
+    },
+    "ChemicalReaction": {
+      "name": "Chemical Reaction"
+    },
+    "ConfusingFumes": {
+      "name": "Confusing Fumes"
+    },
+    "DoubleThrow": {
+      "name": "Double Throw"
+    },
+    "EmpoweringElixir": {
+      "name": "Empowering Elixir"
+    },
+    "FlexStrike": {
+      "name": "Flex Strike"
+    },
+    "FortifyMind": {
+      "name": "Fortify Mind"
+    },
+    "ImpulseBrew": {
+      "name": "Impulse Brew"
+    },
+    "LiquidIdea": {
+      "name": "Liquid Idea"
+    },
+    "PotionPrep": {
+      "name": "Potion Prep"
+    },
+    "QuickGuard": {
+      "name": "Quick Guard"
+    },
+    "RageSerum": {
+      "name": "Rage Serum"
+    },
+    "ReagentDupe": {
+      "name": "Reagent Dupe"
+    },
+    "Revisit": {
+      "name": "Revisit"
+    },
+    "SimpleSolution": {
+      "name": "SimpleSolution"
+    },
+    "SpeedStrike": {
+      "name": "Speed Strike"
+    },
+    "VialToss": {
+      "name": "Vial Toss"
+    }
+  },
+  "artifact": {
+    "Adaptability": {
+      "name": "Adaptability",
+      "desc": "You start each combat with two <c=status>REDRAW</c>."
+    },
+    "ChemicalBooster": {
+      "name": "Chemical Booster",
+      "desc": "When you would create a Simple Solution, create Simple Solution A instead.."
+    },
+    "DailyPreperations": {
+      "name": "Daily Preperations",
+      "desc": "On pickup, add two non-temporary Simple Solutions to your deck."
+    },
+    "DelayedReaction": {
+      "name": "Delayed Reaction",
+      "desc": "Draw 2 extra cards on your second turn."
+    },
+    "Gratification": {
+      "name": "Gratification",
+      "desc": "At the end of your turn, discard and activate the effect of your left-most Reagent."
+    },
+    "InspiredMix": {
+      "name": "Inspired Mix",
+      "desc": "The first time you play a Reagent each turn, draw a card."
+    },
+    "MakeshiftIngredients": {
+      "name": "Makeshift Ingredients",
+      "desc": "On pickup, select a card in your deck to gain Reagent."
+    },
+    "PotionSaver": {
+      "name": "Potion Saver",
+      "desc": "Your Reagents also have Retain."
+    }
+  }
+}
