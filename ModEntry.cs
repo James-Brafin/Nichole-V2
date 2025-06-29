@@ -108,6 +108,9 @@ public sealed class ModEntry : SimpleMod
         => Nichole_CommonArtifact_Types
         .Concat(Nichole_BossArtifact_Types);
 
+    private static IEnumerable<Type> AllRegisterableTypes =
+    Nichole_AllCard_Types
+        .Concat(Nichole_AllArtifact_Types);
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
@@ -187,12 +190,15 @@ public sealed class ModEntry : SimpleMod
             Name = this.AnyLoc.Bind(["character", "Nichole_Tokens", "name"]).Localize,
         });
 
+        foreach (var type in AllRegisterableTypes)
+            AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
+
         Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
         {
             CharacterType = NicholeMain_Deck.Deck.Key(),
             LoopTag = "neutral",
             Frames = [
-                    RegisterSprite(package, "assets/characters/Nichole_Neutral_0").Sprite
+                    RegisterSprite(package, "assets/characters/Nichole_Neutral_0.png").Sprite
                 ]
         });
 
@@ -201,7 +207,7 @@ public sealed class ModEntry : SimpleMod
             CharacterType = NicholeMain_Deck.Deck.Key(),
             LoopTag = "mini",
             Frames = [
-            RegisterSprite(package, "assets/characters/Nichole_Mini").Sprite
+            RegisterSprite(package, "assets/characters/Nichole_Mini.png").Sprite
         ]
         });
 
@@ -210,7 +216,7 @@ public sealed class ModEntry : SimpleMod
             CharacterType = NicholeMain_Deck.Deck.Key(),
             LoopTag = "gameover",
             Frames = [
-           RegisterSprite(package, "assets/characters/Nichole_Scawed").Sprite
+           RegisterSprite(package, "assets/characters/Nichole_Scawed.png").Sprite
         ]
         });
 
@@ -219,7 +225,7 @@ public sealed class ModEntry : SimpleMod
             CharacterType = NicholeMain_Deck.Deck.Key(),
             LoopTag = "squint",
             Frames = [
-            RegisterSprite(package, "assets/characters/Nichole_Angry").Sprite
+            RegisterSprite(package, "assets/characters/Nichole_Angry.png").Sprite
         ]
         });
 
@@ -238,13 +244,6 @@ public sealed class ModEntry : SimpleMod
                 ]
             }
         });
-
-        foreach (var cardType in Nichole_AllCard_Types)
-            AccessTools.DeclaredMethod(cardType, nameof(ICard.Register))?.Invoke(null, [helper]);
-
-        foreach (var artifactType in Nichole_AllArtifact_Types)
-            AccessTools.DeclaredMethod(artifactType, nameof(IArtifact.Register))?.Invoke(null, [helper]);
-        
     }
 
     public static ISpriteEntry RegisterSprite(IPluginPackage<IModManifest> package, string dir)

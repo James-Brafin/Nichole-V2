@@ -15,7 +15,7 @@ internal sealed class BagDump : Card, ICard
     /* For a bit more info on the Register Method, look at InternalInterfaces.cs and 1. CARDS section in ModEntry */
     public static void Register(IModHelper helper)
     {
-        helper.Content.Cards.RegisterCard("DoubleThrow", new()
+        helper.Content.Cards.RegisterCard("BagDump", new()
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new()
