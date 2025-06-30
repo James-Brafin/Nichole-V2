@@ -15,7 +15,7 @@ public class AMakeReagent : CardAction
     {
         if (selectedCard != null)
         {
-            ModEntry.Instance.Helper.Content.Cards.SetCardTraitOverride(s, selectedCard, ReagentManager.Reagent, true, permanent);
+            ModEntry.Instance.Helper.Content.Cards.SetCardTraitOverride(s, selectedCard, ReagentManager.Trait, true, permanent);
             // ModEntry.Instance.WildManager.SetWild(selectedCard, true, permanent);
 
             return showCard ? new CustomShowCards
@@ -46,7 +46,7 @@ public class AMakeReagent : CardAction
                 Title = ModEntry.Instance.Loc.Localize(["action", "makeReagent", "name"]),
                 Description = ModEntry.Instance.Loc.Localize(["action", "makeReagent", "description"], new { Duration = GetDuration() })
             },
-            .. ReagentManager.Reagent.Configuration.Tooltips!(s, selectedCard),
+            .. ReagentManager.Trait.Configuration.Tooltips!(s, selectedCard),
             // new CustomTTGlossary(
             //     CustomTTGlossary.GlossaryType.cardtrait,
             //     () => ModEntry.Instance.WildIcon.Sprite,

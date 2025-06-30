@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using JamesBrafin.Nichole.Features.Actions;
+using Nanoray.PluginManager;
 
 namespace JamesBrafin.Nichole.Cards;
 
 internal sealed class VialToss : Card, ICard
 {
     /* For a bit more info on the Register Method, look at InternalInterfaces.cs and 1. CARDS section in ModEntry */
-    public static void Register(IModHelper helper)
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("VialToss", new()
         {
@@ -87,7 +88,12 @@ internal sealed class VialToss : Card, ICard
                     new AAttack(){damage = GetDmg(s, 2)},
                     ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
                         ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ReactionCost(), 1),
-                        new AAttack(){damage = GetDmg(s, 2)}).AsCardAction
+                        new AStatus()
+                    {
+                        status = Status.shield,
+                        statusAmount = 2,
+                        targetPlayer = true
+                    }).AsCardAction
                 };
                 break;
         }

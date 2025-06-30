@@ -7,13 +7,14 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Nanoray.PluginManager;
 
 namespace JamesBrafin.Nichole.Cards;
 
-internal sealed class EmpoweringElixir : Card, ICard
+internal sealed class EmpoweringElixir : Card, ICard, IHasCustomCardTraits
 {
     /* For a bit more info on the Register Method, look at InternalInterfaces.cs and 1. CARDS section in ModEntry */
-    public static void Register(IModHelper helper)
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("EmpoweringElixir", new()
         {
@@ -47,10 +48,10 @@ internal sealed class EmpoweringElixir : Card, ICard
         return data;
     }
 
-    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state) => upgrade switch
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
     {
-        _ => new HashSet<ICardTraitEntry>() { ReagentManager.Reagent }
-    };
+        return new HashSet<ICardTraitEntry>() { ReagentManager.Trait };
+    }
     public override List<CardAction> GetActions(State s, Combat c)
     {
         /* The meat of the card, this is where we define what a card does, and some would say the most fun part of modding Cobalt Core happens here! */

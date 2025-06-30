@@ -21,4 +21,7 @@
 	<ItemGroup>
 		<Project Include="Configuration.props.user" Condition="Exists('Configuration.props.user')" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="assets\artifacts\" />
+	</ItemGroup>
 </Project>

@@ -7,15 +7,17 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static Shockah.Kokoro.IKokoroApi.IV2.IActionCostsApi;
+using Nanoray.PluginManager;
+
 
 namespace JamesBrafin.Nichole.Cards;
 
-internal sealed class AnalyisisAttack : Card, ICard
+internal sealed class AnalysisAttack : Card, ICard
 {
     /* For a bit more info on the Register Method, look at InternalInterfaces.cs and 1. CARDS section in ModEntry */
-    public static void Register(IModHelper helper)
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        helper.Content.Cards.RegisterCard("AnalyisisAttack", new()
+        helper.Content.Cards.RegisterCard("AnalysAttack", new()
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new()
@@ -30,7 +32,7 @@ internal sealed class AnalyisisAttack : Card, ICard
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             /* AnyLocalizations.Bind().Localize will find the 'name' of 'Foxtale' in 'card', in the locale file, and feed it here. The output for english in-game from this is 'Fox Tale' */
-            Name = ModEntry.Instance.AnyLoc.Bind(["card", "AnalyisisAttack", "name"]).Localize
+            Name = ModEntry.Instance.AnyLoc.Bind(["card", "AnalysisAttack", "name"]).Localize
         });
     }
     public override CardData GetData(State state)

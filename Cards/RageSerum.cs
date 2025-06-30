@@ -1,18 +1,20 @@
-﻿using Nickel;
+﻿using JamesBrafin.Nichole.Features;
+using JamesBrafin.Nichole.Features.Actions;
+using Nanoray.PluginManager;
+using Nickel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
-using JamesBrafin.Nichole.Features.Actions;
 
 namespace JamesBrafin.Nichole.Cards;
 
-internal sealed class RageSerum : Card, ICard
+internal sealed class RageSerum : Card, ICard, IHasCustomCardTraits
 {
     /* For a bit more info on the Register Method, look at InternalInterfaces.cs and 1. CARDS section in ModEntry */
-    public static void Register(IModHelper helper)
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("RageSerum", new()
         {
@@ -44,6 +46,10 @@ internal sealed class RageSerum : Card, ICard
             /* if we don't set a card specific 'description' (a 'string' type) here, the game will attempt to use iconography using the provided CardAction types from GetActions() */
         };
         return data;
+    }
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        return new HashSet<ICardTraitEntry>() { ReagentManager.Trait };
     }
     public override List<CardAction> GetActions(State s, Combat c)
     {

@@ -2,6 +2,7 @@
 using JamesBrafin.Nichole.Features;
 using System.Collections.Generic;
 using System.Reflection;
+using Nanoray.PluginManager;
 
 /* Like other namespaces, this can be named whatever
  * However it's recommended that you follow the structure defined by ModEntry of <AuthorName>.<ModName> or <AuthorName>.<ModName>.Cards*/
@@ -10,10 +11,10 @@ namespace JamesBrafin.Nichole.Cards;
 /* The Card's class name IS IMPORTANT, however. This is what the game will ask for when trying to get a card.
  * If your card's class shares the same name as a vanilla card, or shares it with a modded card, the game can't keep both, and will only use one
  * For this reason, we recommend to give a unique name that is unlikely to be repeated by others, such as incorporating AuthorName or ModName to it */
-internal sealed class SimpleSolution : Card, ICard
+internal sealed class SimpleSolution : Card, ICard, IHasCustomCardTraits
 {
     /* For a bit more info on the Register Method, look at InternalInterfaces.cs and 1. CARDS section in ModEntry */
-    public static void Register(IModHelper helper)
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("SimpleSolution", new()
         {
@@ -47,10 +48,10 @@ internal sealed class SimpleSolution : Card, ICard
         return data;
     }
 
-    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state) => upgrade switch
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
     {
-       _ => new HashSet<ICardTraitEntry>() { ReagentManager.Reagent }
-    };
+        return new HashSet<ICardTraitEntry>() {ReagentManager.Trait };
+    }
 
     public override List<CardAction> GetActions(State s, Combat c)
     {

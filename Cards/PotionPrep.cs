@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using Nanoray.PluginManager;
 
 namespace JamesBrafin.Nichole.Cards;
 
 internal sealed class PotionPrep : Card, ICard
 {
     /* For a bit more info on the Register Method, look at InternalInterfaces.cs and 1. CARDS section in ModEntry */
-    public static void Register(IModHelper helper)
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("PotionPrep", new()
         {
@@ -91,7 +92,7 @@ internal sealed class PotionPrep : Card, ICard
                 {
                     new AAddCard()
                     {
-                        amount = 2,
+                        amount = 1,
                         destination = CardDestination.Deck,
                         card = new SimpleSolution(),
                     },

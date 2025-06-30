@@ -20,8 +20,8 @@ public class InspiredMix : Artifact, IRegisterable
     public bool active = true;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        SpriteActive = helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("Sprites/Artifacts/BlackRose.png")).Sprite;
-        SpriteInactive = helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("Sprites/Artifacts/BlackRoseInactive.png")).Sprite;
+        SpriteActive = helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/artifacts/InspiredMix.png")).Sprite;
+        SpriteInactive = helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/artifacts/InspiredMix.png")).Sprite;
         helper.Content.Artifacts.RegisterArtifact(new ArtifactConfiguration
         {
             ArtifactType = MethodBase.GetCurrentMethod()!.DeclaringType!,

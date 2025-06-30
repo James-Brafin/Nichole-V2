@@ -1,28 +1,19 @@
 {
   "character": {
-    "name": "Nichole",
+    "Nichole": "Nichole",
+    "Nichole_Tokens": "Nichole Tokens",
     "desc": "Nichole is your ship chemist. She creates lots of Reagents and benefits from discarding cards."
-  },
-  "status": {
-    "knowledge": {
-      "name": "Knowledge",
-      "desc": "Base limit of 3. When reaching the limit, spend the required <c=status>KNOWLEDGE</c> to gain 1 <c=status>POWERDRIVE</c> and 1 <c=status>LESSON</c>. Excess <c=status>KNOWLEDGE</c> is not lost."
-    },
-    "lesson": {
-      "name": "Lesson",
-      "desc": "Increase the limit of <c=status>KNOWLEDGE</c> by {0}."
-    }
   },
   "action": {
     "ReactionCost": {
-      "title": "Reaction",
+      "name": "Reaction",
       "desc": "Discards the left-most Reagent in your hand to trigger this effect. If there are no reagents in your hand, does nothing."
     },
     "variableHintDiscard": {
       "desc": "Counts the number of cards in your discard pile."
     }
   },
-  "trait": {
+  "cardTrait": {
     "Reagent": {
       "title": "Reagent",
       "desc": "Used for Reactions. When discarded, activate the On Discard effect."
@@ -72,7 +63,7 @@
       "name": "Liquid Idea"
     },
     "PotionPrep": {
-      "name": "Potion Prep"
+      "name": "Potion \nPrep"
     },
     "QuickGuard": {
       "name": "Quick Guard"
@@ -87,7 +78,7 @@
       "name": "Revisit"
     },
     "SimpleSolution": {
-      "name": "SimpleSolution"
+      "name": "Simple \nSolution"
     },
     "SpeedStrike": {
       "name": "Speed Strike"

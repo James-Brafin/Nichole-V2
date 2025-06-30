@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using JamesBrafin.Nichole.Artifacts;
 using JamesBrafin.Nichole.Cards;
+using JamesBrafin.Nichole.Features.Actions;
 using Microsoft.Extensions.Logging;
 using Nanoray.PluginManager;
 using Nickel;
@@ -37,6 +38,7 @@ public sealed class ModEntry : SimpleMod
     internal IDeckEntry NicholeToken_Deck{ get; }
 
     internal Status RedrawStatus { get; }
+    internal ICardTraitEntry ReagentTrait { get; }
 
     internal static IReadOnlyList<Type> Nichole_Tokens_Types { get; } = [
        typeof(SimpleSolution),
@@ -56,7 +58,7 @@ public sealed class ModEntry : SimpleMod
     internal static IReadOnlyList<Type> Nichole_CommonCard_Types { get; } = [
         typeof(LiquidIdea),
         typeof(DoubleThrow),
-        typeof(AnalyisisAttack),
+        typeof(AnalysisAttack),
         typeof(SpeedStrike),
         typeof(ImpulseBrew)
     ];
@@ -87,7 +89,8 @@ public sealed class ModEntry : SimpleMod
         .Concat(Nichole_AlternateCard_Types)
         .Concat(Nichole_CommonCard_Types)
         .Concat(Nichole_UncommonCard_Types)
-        .Concat(Nichole_RareCard_Types);
+        .Concat(Nichole_RareCard_Types)
+        .Concat(Nichole_Tokens_Types);
 
     /* We'll organize our artifacts the same way: making lists and then feed those to an IEnumerable */
     internal static IReadOnlyList<Type> Nichole_CommonArtifact_Types { get; } = [
@@ -138,13 +141,30 @@ public sealed class ModEntry : SimpleMod
 
         /* Assigning our ISpriteEntry objects manually. This is the easiest way to do it when starting out!
          * Of note: GetRelativeFile is case sensitive. Double check you've written the file names correctly */
-        Nichole_CardBackground = Helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/characters/Nichole_Card_Background.png"));
-        Nichole_CardFrame = Helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/characters/Nichole_Card_CardFrame.png"));
-        Nichole_Panel = Helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/characters/Nichole_Character_Panel.png"));
-        ReagentIcon = Helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/actions/Reagent.png"));
-        ReactionIcon = Helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/actions/Reaction.png"));
-        ReactionOff = Helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/actions/ReactionOff.png"));
-        CountInDiscard = Helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/actions/dest_discard.png"));
+        Nichole_CardBackground = RegisterSprite(package, "assets/characters/Nichole_Card_Background.png");
+        Nichole_CardFrame = RegisterSprite(package, "assets/characters/Nichole_Card_CardFrame.png");
+        Nichole_Panel = RegisterSprite(package, "assets/characters/Nichole_Character_Panel.png");
+        ReagentIcon = RegisterSprite(package, "assets/actions/Reagent.png");
+        ReactionIcon = RegisterSprite(package, "assets/actions/Reaction.png");
+        ReactionOff = RegisterSprite(package, "assets/actions/ReactionOff.png");
+        CountInDiscard = RegisterSprite(package, "assets/actions/dest_discard.png");
+
+        _ = new ReactionCostManager();
+
+        ReagentTrait = helper.Content.Cards.RegisterTrait("ReagentTrait", new()
+        {
+            Name = this.AnyLoc.Bind(["cardtrait", "Reagent", "name"]).Localize,
+            Icon = (state, card) => ReagentIcon.Sprite,
+            Tooltips = (state, card) => [
+                new GlossaryTooltip($"action.{Instance.Package.Manifest.UniqueName}::Impaired")
+                {
+                    Icon = ReagentIcon.Sprite,
+                    TitleColor = Colors.cardtrait,
+                    Title = Loc.Localize(["cardTrait", "Reagent", "name"]),
+                    Description = Loc.Localize(["cardTrait", "Reagent", "desc"])
+                }
+            ]
+        });
 
         /* Decks are assigned separate of the character. This is because the game has decks like Trash which is not related to a playable character
          * Do note that Color accepts a HEX string format (like Color("a1b2c3")) or a Float RGB format (like Color(0.63, 0.7, 0.76). It does NOT allow a traditional RGB format (Meaning Color(161, 178, 195) will NOT work) */
@@ -166,7 +186,7 @@ public sealed class ModEntry : SimpleMod
             BorderSprite = Nichole_CardFrame.Sprite,
 
             /* Since this deck will be used by our Demo Character, we'll use their name. */
-            Name = this.AnyLoc.Bind(["character", "Nichole", "name"]).Localize,
+            Name = this.AnyLoc.Bind(["character", "Nichole"]).Localize,
         });
 
         NicholeToken_Deck = Helper.Content.Decks.RegisterDeck("Nichole_Tokens", new DeckConfiguration()
@@ -187,7 +207,7 @@ public sealed class ModEntry : SimpleMod
             BorderSprite = Nichole_CardFrame.Sprite,
 
             /* Since this deck will be used by our Demo Character, we'll use their name. */
-            Name = this.AnyLoc.Bind(["character", "Nichole_Tokens", "name"]).Localize,
+            Name = this.AnyLoc.Bind(["character", "Nichole_Tokens"]).Localize,
         });
 
         foreach (var type in AllRegisterableTypes)
@@ -225,7 +245,7 @@ public sealed class ModEntry : SimpleMod
             CharacterType = NicholeMain_Deck.Deck.Key(),
             LoopTag = "squint",
             Frames = [
-            RegisterSprite(package, "assets/characters/Nichole_Angry.png").Sprite
+            RegisterSprite(package, "assets/characters/Nichole_Angy.png").Sprite
         ]
         });
 
@@ -234,7 +254,7 @@ public sealed class ModEntry : SimpleMod
         helper.Content.Characters.V2.RegisterPlayableCharacter("Nichole", new()
         {
             Deck = NicholeMain_Deck.Deck,
-            Description = this.AnyLoc.Bind(["character", "description"]).Localize,
+            Description = this.AnyLoc.Bind(["character", "desc"]).Localize,
             BorderSprite = Nichole_Panel.Sprite,
             Starters = new()
             {

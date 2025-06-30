@@ -30,7 +30,7 @@ public class DailyPreperations : Artifact, IRegisterable
             /*
              * For Artifacts with just one sprite, registering them at the place of usage helps simplify things.
              */
-            Sprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Artifact/DailyPreperations.png")).Sprite
+            Sprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/artifacts/DailyPreperations.png")).Sprite
         });
     }
 
