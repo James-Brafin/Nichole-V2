@@ -25,7 +25,7 @@ internal sealed class CaffeineShot : Card, ICard, IHasCustomCardTraits
                 deck = ModEntry.Instance.NicholeMain_Deck.Deck,
 
                 /* The vanilla rarities are Rarity.common, Rarity.uncommon, Rarity.rare */
-                rarity = Rarity.common,
+                rarity = Rarity.uncommon,
 
                 /* Some vanilla cards don't upgrade, some only upgrade to A, but most upgrade to either A or B */
                 upgradesTo = [Upgrade.A, Upgrade.B]

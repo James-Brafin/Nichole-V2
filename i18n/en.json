@@ -15,7 +15,7 @@
   },
   "cardTrait": {
     "Reagent": {
-      "title": "Reagent",
+      "name": "Reagent",
       "desc": "Used for Reactions. When discarded, activate the On Discard effect."
     }
   },

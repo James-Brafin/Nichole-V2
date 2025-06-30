@@ -25,13 +25,13 @@ internal sealed class BagDump : Card, ICard
                 deck = ModEntry.Instance.NicholeMain_Deck.Deck,
 
                 /* The vanilla rarities are Rarity.common, Rarity.uncommon, Rarity.rare */
-                rarity = Rarity.common,
+                rarity = Rarity.rare,
 
                 /* Some vanilla cards don't upgrade, some only upgrade to A, but most upgrade to either A or B */
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             /* AnyLocalizations.Bind().Localize will find the 'name' of 'Foxtale' in 'card', in the locale file, and feed it here. The output for english in-game from this is 'Fox Tale' */
-            Name = ModEntry.Instance.AnyLoc.Bind(["card", "DoubleThrow", "name"]).Localize
+            Name = ModEntry.Instance.AnyLoc.Bind(["card", "BagDump", "name"]).Localize
         });
     }
     public override CardData GetData(State state)

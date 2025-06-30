@@ -65,7 +65,7 @@ internal sealed class ReagentDupe : Card, ICard
                         ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ReactionCost(), 1),
                         new AAddCard()
                         {
-                            amount = 2,
+                            amount = 1,
                             destination = CardDestination.Deck,
                             card = new SimpleSolution()
                         }).AsCardAction
@@ -84,7 +84,7 @@ internal sealed class ReagentDupe : Card, ICard
                         new AAddCard()
                         {
                             amount = 2,
-                            destination = CardDestination.Hand,
+                            destination = CardDestination.Deck,
                             card = new SimpleSolution()
                         }).AsCardAction
                 };
@@ -104,7 +104,7 @@ internal sealed class ReagentDupe : Card, ICard
                         ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ReactionCost(), 1),
                         new AAddCard()
                         {
-                            amount = 2,
+                            amount = 1,
                             destination = CardDestination.Deck,
                             card = new SimpleSolution()
                         }).AsCardAction

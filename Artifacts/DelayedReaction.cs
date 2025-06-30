@@ -37,13 +37,16 @@ public class DelayedReaction : Artifact, IRegisterable
      * Unlike Cards, Artifacts have no required methods. Implement the ones you need, and leave the rest unimplemented.
      * By default, Artifacts have everything implemented with methods that do nothing, so there is no need to call the super.
      */
-    public override void OnCombatStart(State state, Combat combat)
+    public override void OnTurnEnd(State state, Combat combat)
     {
-        combat.QueueImmediate(new AStatus()
+        if (combat.turn == 1)
         {
-            status = Status.drawNextTurn,
-            statusAmount = 2,
-            targetPlayer = true
-        });
+            combat.QueueImmediate(new AStatus()
+            {
+                status = Status.drawNextTurn,
+                statusAmount = 2,
+                targetPlayer = true
+            });
+        }
     }
 }

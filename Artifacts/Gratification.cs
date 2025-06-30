@@ -39,17 +39,15 @@ public class Gratification : Artifact, IRegisterable
      */
     public override void OnTurnEnd(State s, Combat c)
     {
-        int index = c.hand.Count - 1;
-        while (index >= 0 )
+        foreach (Card card in c.hand)
         {
-            if (ReagentManager.IsReagent(c.hand[index], s))
+            if (ReagentManager.IsReagent(card, s))
             {
-                s.RemoveCardFromWhereverItIs(c.hand[index].uuid);
-                c.hand[index].OnDiscard(s, c);
-                c.SendCardToDiscard(s, c.hand[index]);
+                s.RemoveCardFromWhereverItIs(card.uuid);
+                card.OnDiscard(s, c);
+                c.SendCardToDiscard(s, card);
                 return;
             }
-            index--;
         }
     }
 }

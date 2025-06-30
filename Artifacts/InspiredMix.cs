@@ -57,7 +57,7 @@ public class InspiredMix : Artifact, IRegisterable
 
     public override void OnPlayerPlayCard(int energyCost, Deck deck, Card card, State state, Combat combat, int handPosition, int handCount)
     {
-        if (ReagentManager.IsReagent(card, state))
+        if (ReagentManager.IsReagent(card, state) && active == true)
         {
             combat.Queue(new ADrawCard { count = 1 });
             active = false;
