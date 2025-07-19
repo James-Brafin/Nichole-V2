@@ -1,10 +1,11 @@
 using JamesBrafin.Nichole;
-using Nanoray.PluginManager;
-using Nickel;
-using System.Reflection;
+using JamesBrafin.Nichole.Cards;
 using JamesBrafin.Nichole.Features;
 using JamesBrafin.Nichole.Features.Actions;
-using JamesBrafin.Nichole.Cards;
+using Nanoray.PluginManager;
+using Nickel;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace JamesBrafin.Nichole.Artifacts;
 
@@ -38,13 +39,19 @@ public class DailyPreperations : Artifact, IRegisterable
      * Unlike Cards, Artifacts have no required methods. Implement the ones you need, and leave the rest unimplemented.
      * By default, Artifacts have everything implemented with methods that do nothing, so there is no need to call the super.
      */
-    public override void OnReceiveArtifact(State state)
+    public override void OnCombatStart(State state, Combat c)
     {
-        (state.GetDialogue()?.actionQueue ?? state.GetCurrentQueue()).Queue(new AAddCard
+        c.QueueImmediate(new AAddCard()
         {
-            card = new SimpleSolution() {singleUseOverride = true, temporaryOverride = true},
+            amount = 2,
             destination = CardDestination.Deck,
-            callItTheDeckNotTheDrawPile = true,
+            card = new SimpleSolution(),
         });
     }
+
+    public override List<Tooltip>? GetExtraTooltips() => [
+    new TTCard {
+            card = new SimpleSolution(){upgrade = Upgrade.A},
+        }
+];
 }

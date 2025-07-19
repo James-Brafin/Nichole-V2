@@ -70,9 +70,12 @@ internal sealed class Adrenaline : Card, ICard, IHasCustomCardTraits
                         
                     },
                     ModEntry.Instance.KokoroApi.OnDiscard.MakeAction(
-                        new AEnergy()
+                        new AStatus()
                     {
-                        changeAmount = 1
+                        status = Status.energyNextTurn,
+                        statusAmount = 1,
+                        targetPlayer = true
+
                     }).AsCardAction
                 };
                 /* Remember to always break it up! */
@@ -88,9 +91,12 @@ internal sealed class Adrenaline : Card, ICard, IHasCustomCardTraits
 
                     },
                     ModEntry.Instance.KokoroApi.OnDiscard.MakeAction(
-                        new AEnergy()
+                    new AStatus()
                     {
-                        changeAmount = 1
+                        status = Status.energyNextTurn,
+                        statusAmount = 1,
+                        targetPlayer = true
+
                     }).AsCardAction
                 };
                 break;
@@ -107,7 +113,7 @@ internal sealed class Adrenaline : Card, ICard, IHasCustomCardTraits
                     ModEntry.Instance.KokoroApi.OnDiscard.MakeAction(
                         new AEnergy()
                     {
-                        changeAmount = 2
+                        changeAmount = 1
                     }).AsCardAction
                 };
                 break;

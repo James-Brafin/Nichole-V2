@@ -74,12 +74,12 @@ internal sealed class FlexStrike : Card, ICard
                 {
                     new AAttack()
                     {
-                        damage = GetDmg(s, 2)
+                        damage = GetDmg(s, 3)
                     },
                     new AStatus()
                     {
                         status = ModEntry.Instance.RedrawStatus,
-                        statusAmount = 2,
+                        statusAmount = 1,
                         targetPlayer = true
                     }
                 };
@@ -89,7 +89,7 @@ internal sealed class FlexStrike : Card, ICard
                 {
                     new AAttack()
                     {
-                        damage = GetDmg(s, 3)
+                        damage = GetDmg(s, 1)
                     },
                     new AStatus()
                     {

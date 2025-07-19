@@ -97,14 +97,20 @@ internal sealed class LiquidIdea : Card, ICard, IHasCustomCardTraits
                         damage = GetDmg(s, 2)
                     },
                     ModEntry.Instance.KokoroApi.OnDiscard.MakeAction(
-                        new ADrawCard()
+                        new AStatus()
                     {
-                        count = 2
+                        status = Status.drawNextTurn,
+                        statusAmount = 1,
+                        targetPlayer = true
+
                     }).AsCardAction,
                     ModEntry.Instance.KokoroApi.OnDiscard.MakeAction(
-                        new AEnergy()
+                        new AStatus()
                     {
-                        changeAmount = 1
+                        status = Status.energyNextTurn,
+                        statusAmount = 1,
+                        targetPlayer = true
+
                     }).AsCardAction
                 };
                 break;

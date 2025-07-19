@@ -86,7 +86,7 @@ internal sealed class FortifyMind : Card, ICard
                     new AStatus()
                     {
                         status = ModEntry.Instance.RedrawStatus,
-                        statusAmount = 4,
+                        statusAmount = 3,
                         targetPlayer = true
                     }
                 };

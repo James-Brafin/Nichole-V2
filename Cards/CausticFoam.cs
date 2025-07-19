@@ -63,11 +63,11 @@ internal sealed class CausticFoam : Card, ICard
                     },
                     ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
                         ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ReactionCost(), 1),
-                        new AStatus()
+                        new AAttack()
                         {
+                            damage = GetDmg(s, 1),
                             status = Status.corrode,
-                            statusAmount = 1,
-                            targetPlayer = false
+                            statusAmount = 1
                         }).AsCardAction
                 };
                 /* Remember to always break it up! */
@@ -81,11 +81,11 @@ internal sealed class CausticFoam : Card, ICard
                     },
                     ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
                         ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ReactionCost(), 1),
-                        new AStatus()
+                        new AAttack()
                         {
+                            damage = GetDmg(s, 1),
                             status = Status.corrode,
-                            statusAmount = 1,
-                            targetPlayer = false
+                            statusAmount = 1
                         }).AsCardAction
                 };
                 break;
@@ -95,16 +95,15 @@ internal sealed class CausticFoam : Card, ICard
                     new AAttack()
                     {
                         damage = GetDmg(s, 1),
-                        status = Status.corrode,
                         statusAmount = 1
                     },
                     ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
                         ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ReactionCost(), 1),
-                        new AStatus()
+                        new AAttack()
                         {
+                            damage = GetDmg(s, 1),
                             status = Status.corrode,
-                            statusAmount = 1,
-                            targetPlayer = false
+                            statusAmount = 2
                         }).AsCardAction
                 };
                 break;

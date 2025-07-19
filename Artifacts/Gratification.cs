@@ -37,17 +37,23 @@ public class Gratification : Artifact, IRegisterable
      * Unlike Cards, Artifacts have no required methods. Implement the ones you need, and leave the rest unimplemented.
      * By default, Artifacts have everything implemented with methods that do nothing, so there is no need to call the super.
      */
-    public override void OnTurnEnd(State s, Combat c)
+    bool active = true;
+
+    public override void OnTurnEnd(State state, Combat combat)
     {
-        foreach (Card card in c.hand)
+        active = true;
+    }
+    public override void OnCombatEnd(State state)
+    {
+        active = true;
+    }
+
+    public override void OnPlayerPlayCard(int energyCost, Deck deck, Card card, State state, Combat combat, int handPosition, int handCount)
+    {
+        if(ReagentManager.IsReagent(card, state) && active == true)
         {
-            if (ReagentManager.IsReagent(card, s))
-            {
-                s.RemoveCardFromWhereverItIs(card.uuid);
-                card.OnDiscard(s, c);
-                c.SendCardToDiscard(s, card);
-                return;
-            }
+            active = false;
+            card.OnDiscard(state, combat);
         }
     }
 }

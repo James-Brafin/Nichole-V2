@@ -1,10 +1,11 @@
 using JamesBrafin.Nichole;
-using Nanoray.PluginManager;
-using Nickel;
-using System.Reflection;
+using JamesBrafin.Nichole.Cards;
 using JamesBrafin.Nichole.Features;
 using JamesBrafin.Nichole.Features.Actions;
-using JamesBrafin.Nichole.Cards;
+using Nanoray.PluginManager;
+using Nickel;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace JamesBrafin.Nichole.Artifacts;
 
@@ -44,4 +45,10 @@ public class ChemicalBooster : Artifact, IRegisterable
             card.upgrade = Upgrade.A;
         }
     }
+
+    public override List<Tooltip>? GetExtraTooltips() => [
+        new TTCard {
+            card = new SimpleSolution(){upgrade = Upgrade.A},
+        }
+    ];     
 }

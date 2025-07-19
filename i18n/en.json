@@ -89,35 +89,35 @@
   },
   "artifact": {
     "Adaptability": {
-      "name": "Adaptability",
+      "name": "ADAPTABILITY",
       "desc": "You start each combat with two <c=status>REDRAW</c>."
     },
     "ChemicalBooster": {
-      "name": "Chemical Booster",
-      "desc": "When you would create a Simple Solution, create Simple Solution A instead.."
+      "name": "CHEMICAL BOOSTER",
+      "desc": "When you would create a Simple Solution, create Simple Solution A instead."
     },
     "DailyPreperations": {
-      "name": "Daily Preperations",
-      "desc": "On pickup, add two non-temporary Simple Solutions to your deck."
+      "name": "DAILY PREPERATIONS",
+      "desc": "At the start of combat, add two Simple Solutions to your deck."
     },
     "DelayedReaction": {
-      "name": "Delayed Reaction",
+      "name": "DELAYED REACTION",
       "desc": "Draw 2 extra cards on your second turn."
     },
     "Gratification": {
-      "name": "Gratification",
-      "desc": "At the end of your turn, discard and activate the effect of your left-most Reagent."
+      "name": "GRATIFICATION",
+      "desc": "The first Reagent you play each turn activates its On Discard effect."
     },
     "InspiredMix": {
-      "name": "Inspired Mix",
+      "name": "INSPIRED MIX",
       "desc": "The first time you play a Reagent each turn, draw a card."
     },
     "MakeshiftIngredients": {
-      "name": "Makeshift Ingredients",
+      "name": "MAKESHIFT INGREDIENTS",
       "desc": "On pickup, select a card in your deck to gain Reagent."
     },
     "PotionSaver": {
-      "name": "Potion Saver",
+      "name": "POTION SAVER",
       "desc": "Your Reagents also have Retain."
     }
   }

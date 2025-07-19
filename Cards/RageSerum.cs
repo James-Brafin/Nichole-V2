@@ -40,7 +40,8 @@ internal sealed class RageSerum : Card, ICard, IHasCustomCardTraits
         {
             /* Give your card some meta data, such as giving it an energy cost, making it exhaustable, and more */
             cost = upgrade == Upgrade.A ? 1 : 2,
-            exhaust = upgrade == Upgrade.B ? true : false
+            exhaust = upgrade == Upgrade.B ? true : false,
+            infinite = upgrade == Upgrade.A ? true : false
 
             /* if we don't set a card specific 'art' (a 'Spr' type) here, the game will give it the deck's 'DefaultCardArt'
             /* if we don't set a card specific 'description' (a 'string' type) here, the game will attempt to use iconography using the provided CardAction types from GetActions() */

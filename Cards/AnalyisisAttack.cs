@@ -1,5 +1,5 @@
-﻿using JamesBrafin.Nichole.Features;
-using JamesBrafin.Nichole.Features.Actions;
+﻿using JamesBrafin.Nichole.Features.Actions;
+using Nanoray.PluginManager;
 using Nickel;
 using System;
 using System.Collections.Generic;
@@ -7,16 +7,16 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Nanoray.PluginManager;
+using static Shockah.Kokoro.IKokoroApi.IV2.IActionCostsApi;
 
 namespace JamesBrafin.Nichole.Cards;
 
-internal sealed class CaffeineShot : Card, ICard, IHasCustomCardTraits
+internal sealed class AnalyisisAttack : Card, ICard
 {
     /* For a bit more info on the Register Method, look at InternalInterfaces.cs and 1. CARDS section in ModEntry */
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        helper.Content.Cards.RegisterCard("CaffeineShot", new()
+        helper.Content.Cards.RegisterCard("AnalyisisAttack", new()
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new()
@@ -25,13 +25,13 @@ internal sealed class CaffeineShot : Card, ICard, IHasCustomCardTraits
                 deck = ModEntry.Instance.NicholeMain_Deck.Deck,
 
                 /* The vanilla rarities are Rarity.common, Rarity.uncommon, Rarity.rare */
-                rarity = Rarity.uncommon,
+                rarity = Rarity.common,
 
                 /* Some vanilla cards don't upgrade, some only upgrade to A, but most upgrade to either A or B */
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             /* AnyLocalizations.Bind().Localize will find the 'name' of 'Foxtale' in 'card', in the locale file, and feed it here. The output for english in-game from this is 'Fox Tale' */
-            Name = ModEntry.Instance.AnyLoc.Bind(["card", "CaffeineShot", "name"]).Localize
+            Name = ModEntry.Instance.AnyLoc.Bind(["card", "AnalyisisAttack", "name"]).Localize
         });
     }
     public override CardData GetData(State state)
@@ -39,18 +39,12 @@ internal sealed class CaffeineShot : Card, ICard, IHasCustomCardTraits
         CardData data = new CardData()
         {
             /* Give your card some meta data, such as giving it an energy cost, making it exhaustable, and more */
-            cost = 0,
-            exhaust = true
+            cost = 1,
 
             /* if we don't set a card specific 'art' (a 'Spr' type) here, the game will give it the deck's 'DefaultCardArt'
             /* if we don't set a card specific 'description' (a 'string' type) here, the game will attempt to use iconography using the provided CardAction types from GetActions() */
         };
         return data;
-    }
-
-    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
-    {
-        return new HashSet<ICardTraitEntry>() { ReagentManager.Trait };
     }
     public override List<CardAction> GetActions(State s, Combat c)
     {
@@ -63,64 +57,42 @@ internal sealed class CaffeineShot : Card, ICard, IHasCustomCardTraits
             case Upgrade.None:
                 actions = new()
                 {
-                    new AEnergy()
+                    new AAttack()
                     {
-                        changeAmount = 2
+                        damage = GetDmg(s, 2)
                     },
-                    ModEntry.Instance.KokoroApi.OnDiscard.MakeAction(
-                        new AStatus()
-                    {
-                        status = Status.hermes,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    }).AsCardAction
+                    ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
+                        ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ReactionCost(), 1),
+                        new ADrawCard(){count = 1}).AsCardAction
                 };
                 /* Remember to always break it up! */
                 break;
             case Upgrade.A:
                 actions = new()
                 {
-                    new AEnergy()
+                    new AAttack()
                     {
-                        changeAmount = 2
+                        damage = GetDmg(s, 3)
                     },
-                    ModEntry.Instance.KokoroApi.OnDiscard.MakeAction(
-                        new AStatus()
-                    {
-                        status = Status.hermes,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    }).AsCardAction,
-                    ModEntry.Instance.KokoroApi.OnDiscard.MakeAction(
-                        new AStatus()
-                    {
-                        status = Status.overdrive,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    }).AsCardAction
+                    ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
+                        ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ReactionCost(), 1),
+                        new ADrawCard(){count = 1}).AsCardAction
                 };
                 break;
             case Upgrade.B:
                 actions = new()
                 {
-                    new AEnergy()
+                    new AAttack()
                     {
-                        changeAmount = 2
+                        damage = GetDmg(s, 2)
                     },
-                    ModEntry.Instance.KokoroApi.OnDiscard.MakeAction(
-                        new AStatus()
+                    new ADrawCard()
                     {
-                        status = Status.hermes,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    }).AsCardAction,
-                    ModEntry.Instance.KokoroApi.OnDiscard.MakeAction(
-                        new AStatus()
-                    {
-                        status = Status.evade,
-                        statusAmount = 2,
-                        targetPlayer = true
-                    }).AsCardAction
+                        count = 1
+                    },
+                    ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
+                        ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ReactionCost(), 1),
+                        new ADrawCard(){count = 1}).AsCardAction
                 };
                 break;
         }

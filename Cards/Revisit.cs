@@ -38,7 +38,7 @@ internal sealed class Revisit : Card, ICard
         CardData data = new CardData()
         {
             /* Give your card some meta data, such as giving it an energy cost, making it exhaustable, and more */
-            cost = upgrade == Upgrade.A ? 1 : 2
+            cost = 2
 
             /* if we don't set a card specific 'art' (a 'Spr' type) here, the game will give it the deck's 'DefaultCardArt'
             /* if we don't set a card specific 'description' (a 'string' type) here, the game will attempt to use iconography using the provided CardAction types from GetActions() */
@@ -59,7 +59,8 @@ internal sealed class Revisit : Card, ICard
                     new AVariableHintDiscard(),
                     new AAttack()
                     {
-                        damage = GetDmg(s, c.discard.Count)
+                        damage = GetDmg(s, c.discard.Count),
+                        xHint = 1
                     }
                 };
                 /* Remember to always break it up! */
@@ -70,7 +71,14 @@ internal sealed class Revisit : Card, ICard
                     new AVariableHintDiscard(),
                     new AAttack()
                     {
-                        damage = GetDmg(s, c.discard.Count)
+                        damage = GetDmg(s, c.discard.Count),
+                        xHint = 1
+                    },
+                    new AStatus()
+                    {
+                        status = ModEntry.Instance.RedrawStatus,
+                        statusAmount = 2,
+                        targetPlayer = true
                     }
                 };
                 break;
@@ -88,7 +96,8 @@ internal sealed class Revisit : Card, ICard
                     new AVariableHintDiscard(),
                     new AAttack()
                     {
-                        damage = GetDmg(s, c.discard.Count)
+                        damage = GetDmg(s, c.discard.Count),
+                        xHint = 1
                     }
                 };
                 break;
